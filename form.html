@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-container input[type="text"],
+    .form-container select {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .form-container input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    .reviews-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .reviews-container h2 {
+      margin-top: 0;
+    }
+
+    .review-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .review-item strong {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form id="reviewForm">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="rating">Rating:</label>
+        <select id="rating" name="rating" required>
+          <option value="Excellent">Excellent</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Poor">Poor</option>
+          <option value="Very Poor">Very Poor</option>
+        </select>
+      </div>
+      <div>
+        <label for="comment">Comment:</label>
+        <input type="text" id="comment" name="comment" required>
+      </div>
+      <input type="submit" value="Submit Review">
+    </form>
+  </div>
+
+  <div class="reviews-container">
+    <h2>Reviews</h2>
+    <div id="reviewsList"></div>
+  </div>
+
+  <script>
+    // Capture form submission
+    document.getElementById('reviewForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting
+
+      // Retrieve form values
+      const name = document.getElementById('name').value;
+      const rating = document.getElementById('rating').value;
+      const comment = document.getElementById('comment').value;
+
+      // Create a new review item
+      const reviewItem = document.createElement('div');
+      reviewItem.classList.add('review-item');
+      reviewItem.innerHTML = `
+        <strong>${name}</strong> rated it: <strong>${rating}</strong>
+        <p>${comment}</p>
+      `;
+
+      // Append the review to the reviews list
+      document.getElementById('reviewsList').appendChild(reviewItem);
+
+      // Clear the form fields
+      document.getElementById('reviewForm').reset();
+    });
+  </script>
+</body>
+</html>
